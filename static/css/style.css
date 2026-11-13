@@ -1,0 +1,636 @@
+/* shared values for colours spacing and shadows */
+:root {
+  --bg: #16171A;
+  --surface: #202227;
+  --surface-2: #2A2D34;
+  --text: #F3EFE4;
+  --muted: #B4AFA2;
+  --signal: #FFC629;
+  --taxi: #6CB6FF;
+  --go: #6EDC8C;
+  --error: #FF8A70;
+  --border: #8A8678;
+  --radius: 10px;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --page-width: 1120px;
+}
+
+/* base styles for every page */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 0.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(1.65rem, 4vw, 2.4rem);
+}
+
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--taxi);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+ul,
+ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+/* focus outline and helpers for screen readers */
+:focus-visible {
+  outline: 3px solid var(--taxi);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.65rem 1rem;
+  background: var(--signal);
+  color: var(--bg);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 8px;
+  transform: translateY(-250%);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* site header with the brand and runway lights */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--surface-2);
+}
+
+.site-header__inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand {
+  margin: 0;
+  color: var(--signal);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.runway-lights {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.runway-lights li {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  opacity: 0.18;
+  animation: runway-blink 6s linear infinite;
+}
+
+.runway-lights li:nth-child(1) { animation-delay: 0s; }
+.runway-lights li:nth-child(2) { animation-delay: 0.5s; }
+.runway-lights li:nth-child(3) { animation-delay: 1s; }
+.runway-lights li:nth-child(4) { animation-delay: 1.5s; }
+.runway-lights li:nth-child(5) { animation-delay: 2s; }
+.runway-lights li:nth-child(6) { animation-delay: 2.5s; }
+.runway-lights li:nth-child(7) { animation-delay: 3s; }
+.runway-lights li:nth-child(8) { animation-delay: 3.5s; }
+.runway-lights li:nth-child(9) { animation-delay: 4s; }
+.runway-lights li:nth-child(10) { animation-delay: 4.5s; }
+.runway-lights li:nth-child(11) { animation-delay: 5s; }
+.runway-lights li:nth-child(12) { animation-delay: 5.5s; }
+
+@keyframes runway-blink {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--signal);
+  }
+
+  12% {
+    opacity: 0.18;
+    box-shadow: none;
+  }
+
+  100% {
+    opacity: 0.18;
+    box-shadow: none;
+  }
+}
+
+/* main navigation */
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  background: var(--surface-2);
+  text-decoration: underline;
+}
+
+/* header action buttons */
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* keeps a space before the effects state word */
+#effects-state {
+  margin-left: 0.35rem;
+}
+
+/* shared button styles and colour variants */
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.55rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+.button:hover,
+button:focus-visible,
+.button:focus-visible {
+  border-color: var(--taxi);
+}
+
+.button-primary {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--bg);
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  background: #FFD45C;
+  border-color: #FFD45C;
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.button-danger {
+  background: var(--error);
+  border-color: var(--error);
+  color: var(--bg);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* form controls and fields */
+label,
+legend {
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.7rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+}
+
+textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--text);
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.login-card {
+  max-width: 26rem;
+}
+
+/* error summary and inline error messages */
+.error-summary {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--error);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.error-summary h2 {
+  margin: 0 0 0.5rem;
+  color: var(--error);
+}
+
+.error-summary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.error-summary a {
+  display: block;
+  padding: 0.45rem 0;
+  color: var(--error);
+  font-weight: 700;
+}
+
+.error-message {
+  margin: 0.35rem 0 0;
+  color: var(--error);
+  font-weight: 700;
+}
+
+/* fieldsets for grouped choices */
+fieldset {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+legend {
+  padding: 0 0.4rem;
+}
+
+/* cards and the dashboard grids */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.stat-grid,
+.action-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.stat-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+.action-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+.stat-card { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.stat-icon { width: 14px; height: 14px; border-radius: 50%; }
+
+.stat-icon--stored { background: var(--signal); }
+.stat-icon--claimed { background: var(--go); }
+.stat-icon--disposed { background: var(--muted); }
+
+.stat-number { font-size: 2.2rem; font-weight: 800; line-height: 1.1; }
+
+.stat-word { color: var(--muted); font-weight: 700; }
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 7rem;
+  border-color: var(--border);
+  color: var(--text);
+  font-weight: 700;
+  text-align: left;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.action-card:hover,
+.action-card:focus-visible { transform: translateY(-4px); }
+
+.action-hint { color: var(--muted); font-weight: 400; }
+
+/* filter controls on the records page */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1rem;
+  align-items: end;
+  margin-bottom: 1.75rem;
+}
+
+/* records table inside its own scroll container */
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.records-table { width: 100%; min-width: 640px; border-collapse: collapse; }
+
+.records-table th,
+.records-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--surface-2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.records-table thead th { background: var(--surface-2); border-bottom: 2px solid var(--border); }
+
+.records-table th button { width: 100%; }
+
+th[aria-sort="ascending"] button::after { content: " \2191"; }
+
+th[aria-sort="descending"] button::after { content: " \2193"; }
+
+/* status badges and pagination */
+.status-badge { display: inline-flex; align-items: center; gap: 0.45rem; }
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+/* loading spinner */
+.spinner {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  border: 3px solid var(--surface-2);
+  border-top-color: var(--signal);
+  border-radius: 50%;
+  vertical-align: -0.15em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* delete confirmation dialog */
+.delete-dialog {
+  width: min(92vw, 26rem);
+  padding: 1.5rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.delete-dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
+
+.delete-dialog form { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* narrow form card and choice rows */
+.form-card { max-width: 36rem; }
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  accent-color: var(--signal);
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+}
+
+.choice label { margin: 0; font-weight: 400; }
+
+/* main content area and footer */
+.page {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 5rem;
+}
+
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--surface-2);
+}
+
+.site-footer__inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 1.25rem 8.5rem 1.25rem 1rem;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* stops animation when effects are off or motion is reduced */
+body.calm *,
+body.calm *::before,
+body.calm *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* soft glow that grows on the primary button */
+.button-primary {
+  box-shadow: 0 0 12px rgba(255, 198, 41, 0.35);
+  transition: box-shadow 0.2s ease;
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  box-shadow: 0 0 22px rgba(255, 198, 41, 0.55);
+}
+
+/* slow pulse on the stored status dot only */
+.stat-icon--stored { animation: stored-pulse 3s ease-out infinite; }
+
+@keyframes stored-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 198, 41, 0.5); }
+  100% { box-shadow: 0 0 0 9px rgba(255, 198, 41, 0); }
+}
+
+/* pointer spotlight on the dashboard cards */
+.stat-card,
+.action-card {
+  background-image: radial-gradient(
+    circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(255, 198, 41, 0.09),
+    rgba(255, 198, 41, 0) 65%
+  );
+}
+
+body.calm .stat-card,
+body.calm .action-card {
+  background-image: none;
+}
+
+/* floating log item button */
+.floating-log-button {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0.75rem 1.4rem;
+  border: 2px solid var(--signal);
+  border-radius: 999px;
+  background: var(--signal);
+  color: var(--bg);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(255, 198, 41, 0.4);
+  animation: gentle-bob 3.2s ease-in-out infinite;
+}
+
+.floating-log-button:hover,
+.floating-log-button:focus-visible {
+  background: #FFD45C;
+  border-color: #FFD45C;
+  box-shadow: 0 0 30px rgba(255, 198, 41, 0.6);
+}
+
+@keyframes gentle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}

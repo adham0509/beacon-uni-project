@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard, Beacon{% endblock %}
+
+{% block heading %}<span id="welcome-heading">Dashboard</span>{% endblock %}
+
+{% block content %}
+<h2>Item statistics</h2>
+<p id="stats-loading" role="status">Loading statistics</p>
+<p id="stats-error" class="error-message" role="alert" hidden><span aria-hidden="true">&#9888;</span> Could not load the statistics. Refresh the page to try again.</p>
+<ul class="stat-grid" id="stat-grid" aria-busy="true">
+<li class="card stat-card">
+<span class="stat-icon stat-icon--stored" aria-hidden="true"></span>
+<span class="stat-number" id="stored-count">&ndash;</span>
+<span class="stat-word">Stored</span>
+</li>
+<li class="card stat-card">
+<span class="stat-icon stat-icon--claimed" aria-hidden="true"></span>
+<span class="stat-number" id="claimed-count">&ndash;</span>
+<span class="stat-word">Claimed</span>
+</li>
+<li class="card stat-card">
+<span class="stat-icon stat-icon--disposed" aria-hidden="true"></span>
+<span class="stat-number" id="disposed-count">&ndash;</span>
+<span class="stat-word">Disposed</span>
+</li>
+</ul>
+<h2>Quick actions</h2>
+<ul class="action-grid">
+<li><a class="card action-card" href="/records">View records<span class="action-hint">Search items and hand them back</span></a></li>
+<li><a class="card action-card" href="/records/new">Log a new item<span class="action-hint">Record something just found</span></a></li>
+<li><button type="button" class="card action-card" id="dashboard-sign-out">Sign out<span class="action-hint">End your desk session</span></button></li>
+</ul>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+{% endblock %}

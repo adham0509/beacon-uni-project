@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Log item, Beacon{% endblock %}
+
+{% block heading %}Log a new item{% endblock %}
+
+{% block content %}
+<div class="error-summary" id="error-summary" role="alert" tabindex="-1" hidden>
+<h2>There is a problem</h2>
+<ul id="error-summary-list"></ul>
+</div>
+<p id="form-status" role="status" aria-live="polite"></p>
+<p id="form-error" class="error-message" role="alert" hidden><span aria-hidden="true">&#9888;</span> <span id="form-error-text"></span></p>
+<form id="item-form" class="card form-card" method="post" action="/records/new">
+<div class="form-field">
+<label for="item-name">Item name</label>
+<input type="text" id="item-name" name="item_name" aria-describedby="item-name-error">
+<p class="error-message" id="item-name-error" hidden><span aria-hidden="true">&#9888;</span> <span id="item-name-error-text"></span></p>
+</div>
+<div class="form-field">
+<label for="category">Category</label>
+<select id="category" name="category" aria-describedby="category-error">
+<option value="">Choose a category</option>
+<option value="Electronics">Electronics</option>
+<option value="Bags">Bags</option>
+<option value="Clothing">Clothing</option>
+<option value="Documents">Documents</option>
+<option value="Keys">Keys</option>
+<option value="Other">Other</option>
+</select>
+<p class="error-message" id="category-error" hidden><span aria-hidden="true">&#9888;</span> <span id="category-error-text"></span></p>
+</div>
+<div class="form-field">
+<label for="found-location">Found location</label>
+<select id="found-location" name="found_location" aria-describedby="found-location-error">
+<option value="">Choose a location</option>
+<option value="Terminal 1">Terminal 1</option>
+<option value="Terminal 2">Terminal 2</option>
+<option value="Security">Security</option>
+<option value="Gate area">Gate area</option>
+<option value="Taxi rank">Taxi rank</option>
+</select>
+<p class="error-message" id="found-location-error" hidden><span aria-hidden="true">&#9888;</span> <span id="found-location-error-text"></span></p>
+</div>
+<div class="form-field">
+<label for="found-date">Date found</label>
+<input type="date" id="found-date" name="found_date" aria-describedby="found-date-error">
+<p class="error-message" id="found-date-error" hidden><span aria-hidden="true">&#9888;</span> <span id="found-date-error-text"></span></p>
+</div>
+<div class="form-field">
+<label for="description">Description (optional)</label>
+<textarea id="description" name="description"></textarea>
+</div>
+<fieldset class="form-field">
+<legend>Condition</legend>
+<div class="choice">
+<input type="radio" id="condition-good" name="condition" value="Good" checked>
+<label for="condition-good">Good</label>
+</div>
+<div class="choice">
+<input type="radio" id="condition-damaged" name="condition" value="Damaged">
+<label for="condition-damaged">Damaged</label>
+</div>
+</fieldset>
+<fieldset class="form-field">
+<legend>Special handling</legend>
+<div class="choice">
+<input type="checkbox" id="fragile" name="is_fragile">
+<label for="fragile">Fragile</label>
+</div>
+<div class="choice">
+<input type="checkbox" id="valuable" name="is_valuable">
+<label for="valuable">Valuable</label>
+</div>
+<div class="choice">
+<input type="checkbox" id="sealed" name="is_sealed">
+<label for="sealed">Sealed</label>
+</div>
+</fieldset>
+<div class="form-field" id="serial-field" hidden>
+<label for="serial-number">Serial number</label>
+<input type="text" id="serial-number" name="serial_number" aria-describedby="serial-number-error">
+<p class="error-message" id="serial-number-error" hidden><span aria-hidden="true">&#9888;</span> <span id="serial-number-error-text"></span></p>
+</div>
+<div class="form-field" id="shelf-field" hidden>
+<label for="shelf-code">Shelf code</label>
+<input type="text" id="shelf-code" name="shelf_code" aria-describedby="shelf-code-error">
+<p class="error-message" id="shelf-code-error" hidden><span aria-hidden="true">&#9888;</span> <span id="shelf-code-error-text"></span></p>
+</div>
+<button type="submit" id="save-button" class="button button-primary">Log item</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/form.js') }}" defer></script>
+{% endblock %}

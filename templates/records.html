@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Records, Beacon{% endblock %}
+
+{% block heading %}Lost property records{% endblock %}
+
+{% block content %}
+{# status messages and the table region #}
+<p id="records-error" class="error-message" role="alert" hidden><span aria-hidden="true">&#9888;</span> <span id="records-error-text"></span></p>
+<p id="loading-region" role="status"><span class="spinner" aria-hidden="true"></span> Loading items</p>
+{# filter controls for searching and narrowing the records #}
+<fieldset class="filters">
+<legend>Filter items</legend>
+<div class="form-field">
+<label for="search-box">Search by name or description</label>
+<input type="search" id="search-box" name="search">
+</div>
+<div class="form-field">
+<label for="category-filter">Category</label>
+<select id="category-filter" name="category">
+<option value="All">All categories</option>
+<option value="Electronics">Electronics</option>
+<option value="Bags">Bags</option>
+<option value="Clothing">Clothing</option>
+<option value="Documents">Documents</option>
+<option value="Keys">Keys</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div class="form-field">
+<label for="status-filter">Status</label>
+<select id="status-filter" name="status">
+<option value="All">All statuses</option>
+<option value="Stored">Stored</option>
+<option value="Claimed">Claimed</option>
+<option value="Disposed">Disposed</option>
+</select>
+</div>
+<button type="button" class="button button-secondary clear-filters">Clear filters</button>
+</fieldset>
+<p id="results-count" role="status" aria-live="polite" tabindex="-1"></p>
+<div id="table-region" class="table-scroll" role="region" aria-label="Records table" aria-busy="true" tabindex="0">
+<table id="records-table" class="records-table">
+<caption>All items logged at the lost property desk</caption>
+<thead id="records-head">
+<tr>
+<th scope="col" aria-sort="none"><button type="button" data-sort-key="item_name">Item</button></th>
+<th scope="col" aria-sort="none"><button type="button" data-sort-key="category">Category</button></th>
+<th scope="col">Location</th>
+<th scope="col" aria-sort="none"><button type="button" data-sort-key="found_date">Date found</button></th>
+      <th scope="col" aria-sort="none"><button type="button" data-sort-key="status">Status</button></th>
+      <th scope="col">Logged by</th>
+      <th scope="col">Actions</th>
+</tr>
+</thead>
+<tbody id="records-body"></tbody>
+</table>
+</div>
+<nav class="pagination" id="pagination" aria-label="Records pages" hidden>
+<button type="button" id="previous-page" class="button button-secondary">Previous page</button>
+<span id="page-label">Page 1 of 1</span>
+<button type="button" id="next-page" class="button button-secondary">Next page</button>
+</nav>
+<div id="empty-state" class="card" hidden>
+<p>No items match your filters.</p>
+<button type="button" class="button button-secondary clear-filters">Clear filters</button>
+</div>
+<dialog id="delete-dialog" class="delete-dialog">
+<form method="dialog">
+<h2>Delete this item?</h2>
+<p id="delete-dialog-text"></p>
+<button type="submit" value="cancel" class="button button-secondary">Cancel</button>
+<button type="submit" value="delete" class="button button-danger">Delete item</button>
+</form>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/records.js') }}" defer></script>
+{% endblock %}

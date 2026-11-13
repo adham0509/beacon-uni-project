@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Sign in, Beacon{% endblock %}
+
+{% block heading %}Sign in{% endblock %}
+
+{% block content %}
+<div class="error-summary" id="error-summary" role="alert" tabindex="-1" hidden>
+<h2>There is a problem</h2>
+<ul id="error-summary-list"></ul>
+</div>
+<form id="login-form" class="card login-card" method="post" action="/login">
+<div class="form-field">
+<label for="username">Username</label>
+<input type="text" id="username" name="username" autocomplete="username" aria-describedby="username-error">
+<p class="error-message" id="username-error" hidden><span aria-hidden="true">&#9888;</span> Enter your username</p>
+</div>
+<div class="form-field">
+<label for="password">Password</label>
+<input type="password" id="password" name="password" autocomplete="current-password" aria-describedby="password-error">
+<p class="error-message" id="password-error" hidden><span aria-hidden="true">&#9888;</span> Enter your password</p>
+</div>
+<button type="submit" id="login-button" class="button button-primary">Sign in</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
+{% endblock %}
